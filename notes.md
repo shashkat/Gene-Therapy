@@ -27,7 +27,7 @@ question:
 
 Need to know about GC bias and how AAVs infect cells.
 
-01-14-23
+01-14-24
 
 I found the data from the paper, and I am gonna try to follow the steps of processing (and preprocessing, which will require more resources) the scRNAseq data. 
 
@@ -38,15 +38,32 @@ step2. will be to begin with the processed gene abundances and perform on them, 
 Day end-  I installed salmon using Docker (basically pulled its image) as coudnt run the binary because it was made for linux and conda install also didnt work because of my outdated conda. 
 Next step is to use the docker image of salmon to process files (Still on step 1).
 
-01-15-23
+01-15-24
 
 i tried to run a docker container (in interactive mode) and was able to do that and check installation of salmon successfully. Now, I need to understand the command which was used to quantify the transcripts. Basically, in the GEO page, they have provided a barcodes file and another file, which says that in the barcodes file, which ones are the AAV barcodes.
 So what I was thinking is that the AAV barcodes would be a part of the transcripts.fa file, so that those barcodes would be recognized as some genes in the cells (datapoints), and we would be able to identify which cells were infected by which AAVs. But apparently they have made those barcodes a part of the barcodes file, which contains the identifiers for the cells, but I dont know how it works that way, and how to run Salmon according to this input format.
 
-01-18-23
+01-18-24
 
 Updates from the last few days:
 I got access to the github repo of the scAAVengr pipeline.
 Made account on ACCESS for access to HPCs.
 
 About the doubt regarding how presence of AAVs were found in the sequenced data, I still have to figure that out. 
+
+So looking at the github repo, I see that in the step where they are making the AAV (GFP) vs Cell matrix, they are taking as input a file with name like: LB1_BYR819A1_S1_R2_001.subgfp.seqkitlocate.txt.
+
+Hence, next task: know more about seqkit and what this file would possibly contain. Also need to clarify what is the deal with this GFP thing with AAV.
+
+Later tasks: read the single cell best practices given at the bottom of the repository Readme.
+
+01-19-24
+
+01-29-24
+
+- Met with Aman and got to know how to join the CRC (Pitt cluster). And also within that, in which folder do I have storage (it was something like /bgfs/lbyrne/shashkat, though I am not exactly sure of the first folder). Also we connect to the htc server rather than h2p. Important link: https://crc.pitt.edu/getting-started/accessing-cluster
+- Discussed that initially, just doing QC with Fastqc would be sufficient. 
+- Also looked into the box folder shared by Ally.
+- Aman showed me examples of how he runs scripts on the cluster.
+- Also he is currently trying to get me access to the other cluster (I think PSC), as we have credits there and it has more functionalities.
+- I can go through the slurm documentation he provided me with.
