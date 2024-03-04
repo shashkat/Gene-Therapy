@@ -1,0 +1,22 @@
+{
+    "index_version": 4,
+    "reference_gfa": [
+        "/bgfs/lbyrne/PGTB/resources/gfp_barcodes_salmon_index"
+    ],
+    "sampling_type": "dense",
+    "k": 31,
+    "num_kmers": 2194,
+    "num_contigs": 60,
+    "seq_length": 3994,
+    "have_ref_seq": true,
+    "have_edge_vec": false,
+    "SeqHash": "cd048be25c2fa7105a40c5b47ba1afd0e2b85acdf991ea641f4085b77c1c436e",
+    "NameHash": "4f250bf82bc4eb54cbb0f58b985b5cef6573543690fc77e339a27d45225fc83e",
+    "SeqHash512": "ff0c45dd753114be2260631ffc8632c66a90a915114c46ca9e65356772c4c6b92cf18deeb9a37b926ab3eb38d5f991173a6d4697e680b9c9c63ebfacefc263c0",
+    "NameHash512": "51184f6957d6920919afeaa9722d97ea4410b9fab6b08def53eb27a67943e18166a6a69e318504660e051196914e027d783db6cca29abdb826294e909e06b729",
+    "DecoySeqHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "DecoyNameHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "num_decoys": 0,
+    "first_decoy_index": 18446744073709551615,
+    "keep_duplicates": false
+}
