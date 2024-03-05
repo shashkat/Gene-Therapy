@@ -30,7 +30,6 @@ user	0m0.402s
 sys	0m0.240s
 
 ### unzipped, but with -F flag
-
 time zgrep -o -F -m 1000 -e GTGCATGA RPE_1_S5_R2_001.fastq.gz | sort | uniq -c
 
 real	0m1.879s
@@ -62,6 +61,9 @@ time parallel -k -j 30 'zgrep -o -F -m 1000 -e GTGCATGA -e TGTTGGAG -e GACATACG 
 
 time parallel -k -j 30 'zgrep -o -F -e GTGCATGA -e TGTTGGAG -e GACATACG -e GAGTAACG -e GAGAGCAA -e GGTGTTAG -e ACGAACGA -e CGAAGCAA -e GTCCTGAA {} | sort | uniq -c' ::: RPE_1_S5_R2_001.fastq.gz RPE_2_S6_R2_001.fastq.gz RPE_3_S7_R2_001.fastq.gz > grep_result.txt
 
+### command to manually test the output (for confirming if the results produced by the script is correct)
+
+time zgrep -o -e GAGAGCAATCGACTAGAGCT Undetermined_S0_R2_001.fastq.gz | sort | uniq -c
 
 # The right command/s
 
@@ -106,3 +108,6 @@ time parallel -k -j 30 'zgrep -o -F -e GTGCATGA -e TGTTGGAG -e GACATACG -e GAGTA
 
 (took around 7 mins)
 
+To test the -H flag, which necessitates filenames for every search result of grep
+
+time parallel -k -j 30 'zgrep -H -o -F -m 100 -e GTGCATGA -e TGTTGGAG -e GACATACG -e GAGTAACG -e GAGAGCAA -e GGTGTTAG -e ACGAACGA -e CGAAGCAA -e GTCCTGAA {} | sort | uniq -c' ::: Ret_1_S1_R2_001.fastq.gz Ret_2_S2_R2_001.fastq.gz Ret_3_S3_R2_001.fastq.gz Ret_4_S4_R2_001.fastq.gz > grep_result_Ret.txt

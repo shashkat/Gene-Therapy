@@ -194,4 +194,8 @@ time parallel -k -j 30 'zgrep -o -F -e GTGCATGA -e TGTTGGAG -e GACATACG -e GAGTA
 
 - did the initial quantification successfully. The related files are stored in finding_AAVs/through_grep. 
 
+- Ali asked me to do the quantifications of the bigger (extended) barcodes, because there was nonspecific finding of barcodes happening. However, my script till now was incapable of dealing with patterns having zero counts in the grep results. I modified to script (which involved using the -H option of grep) so that it could deal with patterns having zero count in grep. Validated intitial results on the RPE_1_S5_R2_001.fastq.gz file using manual grep command.
+
+- sent the mail to Ali with the results for the longer barcodes.
+
 

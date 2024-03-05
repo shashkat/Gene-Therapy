@@ -18,7 +18,7 @@ with open(fastqs_to_process_file, 'r') as f:
     fastqs = [x.strip() for x in fastqs]
 
 # prepare the command string:
-command = r"time parallel -k -j 30 'zgrep -o -F -f " +  input_barcodes_file +  r" {} | sort | uniq -c' ::: "
+command = r"time parallel -k -j 30 'zgrep -o -F -H -f " +  input_barcodes_file +  r" {} | sort | uniq -c' ::: "
 
 # command = r"zgrep -o -F -f " +  input_barcodes_file +  r" temp.fastq.gz | sort | uniq -c"
 
@@ -56,18 +56,35 @@ with open('grep_output.txt', 'r') as f:
     output = f.readlines()
     output = [x.strip() for x in output]
 
+# NO LONGER NEEDED AS I AM INITALIZING THE NONEXISTENT BARCODES WITH 0 COUNTS NOW 
 # ensure that len(output) is len(fastqs) * num_barcodes
-if len(output) != len(fastqs) * num_barcodes:
-    print('Error: the output file does not have the correct number of lines')
-    sys.exit(1)
+# if len(output) != len(fastqs) * num_barcodes:
+#     print('Error: the output file does not have the correct number of lines')
+#     sys.exit(1)
 
 # make a dict to store the counts of the barcodes for each fastq
 counts = {}
-for fastq_num, fastq in enumerate(fastqs):
-    counts[fastq] = {}
-    for barcode_num, barcode in enumerate(sorted_barcodes):
-        counts[fastq][barcode] = int(output[fastq_num*num_barcodes + barcode_num].split(' ')[0])
+for line in output:
+    # split the line into the count and the fastq and barcode
+    count, fastq_barcode = line.split(' ')
+    # split the fastq and barcode using the ':' delimiter
+    fastq, barcode = fastq_barcode.split(':')
+    if fastq not in counts:
+        counts[fastq] = {}
+        # initialize the counts for the barcodes (so that nonexistent ones have a count of 0)
+        for barcode in sorted_barcodes:
+            counts[fastq][barcode] = 0
+    counts[fastq][barcode] = int(count)
+
+# OLD IMPLEMENTATION OF THE COUNTS DICTIONARY
+# make a dict to store the counts of the barcodes for each fastq
+# counts = {}
+# for fastq_num, fastq in enumerate(fastqs):
+#     counts[fastq] = {}
+#     for barcode_num, barcode in enumerate(sorted_barcodes):
+#         counts[fastq][barcode] = int(output[fastq_num*num_barcodes + barcode_num].split(' ')[0])
         # barcode counts stored above, now make the final dataframe type object which will be the result
+
 
 # make a dataframe from the counts dict
 
